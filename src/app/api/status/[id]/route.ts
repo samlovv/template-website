@@ -1,16 +1,24 @@
 import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-// App Router — здесь строго: (req: Request, context: { params: ... })
-export async function PUT(req: Request, context: { params: { id: string } }) {
-  const { id } = context.params;
-  const { status } = await req.json();
+export async function PUT(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const { id } = params;
+    const { status } = await request.json();
 
-  const updated = await prisma.template.update({
-    where: { id: Number(id) },
-    data: { status },
-  });
+    const updated = await prisma.template.update({
+      where: { id: Number(id) },
+      data: { status },
+    });
 
-  return NextResponse.json({ data: updated });
+    return NextResponse.json({ data: updated });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
-
