@@ -4,16 +4,14 @@ import { NextResponse } from "next/server";
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
-): Promise<NextResponse> {
+) {
   try {
     const { id } = params;
     const { status } = await request.json();
 
-    if (!id || !status) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
+    // Валидация
+    if (!id || isNaN(Number(id))) {
+      return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
     }
 
     const updated = await prisma.template.update({
@@ -21,9 +19,10 @@ export async function PUT(
       data: { status },
     });
 
-    return NextResponse.json({ data: updated });
+    return NextResponse.json(updated);
+    
   } catch (error) {
-    console.error("Error updating template:", error);
+    console.error("Update error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
