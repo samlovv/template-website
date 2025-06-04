@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+// App Router — здесь строго: (req: Request, context: { params: ... })
+export async function PUT(req: Request, context: { params: { id: string } }) {
+  const { id } = context.params;
   const { status } = await req.json();
 
   const updated = await prisma.template.update({
@@ -12,3 +13,4 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
   return NextResponse.json({ data: updated });
 }
+
