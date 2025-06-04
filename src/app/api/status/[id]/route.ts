@@ -1,30 +1,37 @@
-import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
-) {
+): Promise<NextResponse> {
   try {
-    const { id } = params;
-    const { status } = await request.json();
-
-    // Валидация
-    if (!id || isNaN(Number(id))) {
-      return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+    const id = Number(params.id);
+    if (isNaN(id)) {
+      return NextResponse.json(
+        { error: 'Invalid ID format' },
+        { status: 400 }
+      );
     }
 
-    const updated = await prisma.template.update({
-      where: { id: Number(id) },
+    const { status } = await request.json();
+    if (!status) {
+      return NextResponse.json(
+        { error: 'Status is required' },
+        { status: 400 }
+      );
+    }
+
+    const updatedItem = await prisma.template.update({
+      where: { id },
       data: { status },
     });
 
-    return NextResponse.json(updated);
-    
+    return NextResponse.json(updatedItem);
   } catch (error) {
-    console.error("Update error:", error);
+    console.error('Database error:', error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }
