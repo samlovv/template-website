@@ -33,10 +33,10 @@ export default function AdminTemplatePage() {
 
   const updateStatus = async (id: number, status: "Verified" | "Rejected") => {
     try {
-      const res= await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/status/${id}`, {
+      const res= await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/templates/status/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ id, status }),
       });
       console.log(res)
 
