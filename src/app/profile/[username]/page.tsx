@@ -6,16 +6,17 @@ import { prisma } from '@/lib/prisma'
 import { Metadata } from 'next'
 
 
+type Params = Promise<{ username: string }>;
 
-export async function generateMetadata({ params }: { params: { username: string } }) {
-  const username = decodeURIComponent(params.username)
+export async function generateMetadata({ params }: { params: Params }) {
+  const { username } = await params
   return {
     title: `${username}'s Profile | TemplateUI`,
     description: `Explore ${username}'s templates and creations on TemplateUI.`,
   }
 }
 
-const UserPage = async({ params }: { params: { username: string } }) => {
+const UserPage = async({ params }: { params: Params }) => {
     const { username } = await params
 
     const user = await prisma.user.findUnique({
