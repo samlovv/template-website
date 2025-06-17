@@ -39,7 +39,7 @@ const UserProfile = ({username}: Props) => {
     useEffect(()=>{
         show();
         async function fetchUser(){
-            const res = await fetch(`/api/users/${username}`);
+            const res = await fetch(`/api/users/username?username=${username}`);
             const data = await res.json();
             setUser(data)
             setTemplates(data.posts)
