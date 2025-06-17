@@ -1,5 +1,6 @@
 import TemplateComp from '@/components/TemplateComp'
 import React from 'react'
+import { Suspense } from "react";
 
 export const metadata = {
   title: 'Templates Gallery | TemplateUI',
@@ -9,7 +10,9 @@ export const metadata = {
 const Templates = () => {
   return (
     <div className='my-20 px-6 md:px-12'>
-      <TemplateComp/>
+      <Suspense fallback={<div>Loading Templates...</div>}>
+        <TemplateComp />
+      </Suspense>
     </div>
   )
 }
