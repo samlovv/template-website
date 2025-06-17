@@ -59,7 +59,6 @@ export default function ProfilePage() {
 
   const user = session.user;
   const nickname = user.nickname || user.email?.split("@")[0];
-  console.log(user)
 
   return (
     <div className="min-h-screen w-full lg:w-4/6 float-right text-white flex flex-col">
@@ -82,9 +81,7 @@ export default function ProfilePage() {
               <p className="lg:text-xl text-lg text-gray-400">{nickname}</p>
             </div>
           </div>
-          <div className="text-3xl">
-            {user.image}
-          </div>
+          
           
 
           {/* Tabs */}
