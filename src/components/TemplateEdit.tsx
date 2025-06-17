@@ -65,7 +65,7 @@ export default function TemplateEdit({ id }: { id: string }) {
     async function fetchData() {
       try {
         show();
-        const res = await fetch(`/api/templates/${id}`);
+        const res = await fetch(`/api/templates/view?id=${id}`);
         const data = await res.json();
         setCssCode(data.css || '');
         setHtmlCode(data.html || '');
