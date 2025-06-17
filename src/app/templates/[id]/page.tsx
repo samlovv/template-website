@@ -27,7 +27,9 @@ import ProfileCategorySelector from '@/components/ProfileCategorySelector'
 import TemplateEdit from '@/components/TemplateEdit'
 import React from 'react'
 
-const Template = async({params} : {params: {id: string}}) => {
+type Params = Promise<{ id: string }>;
+
+const Template = async({ params }: { params: Params }) => {
 
     const {id} = await params
 
