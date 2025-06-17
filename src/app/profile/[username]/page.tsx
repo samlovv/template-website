@@ -19,16 +19,6 @@ export async function generateMetadata({ params }: { params: Params }) {
 const UserPage = async({ params }: { params: Params }) => {
     const { username } = await params
 
-    const user = await prisma.user.findUnique({
-      where: {
-        nickname: username,
-      },
-    })
-
-    if (!user) {
-      notFound() // автоматически показывает 404 страницу
-    }
-
     
     
   return (
