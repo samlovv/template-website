@@ -47,7 +47,7 @@ Shows user avatar, nickname, and their published templates
 | **GSAP**         | Smooth UI animations               |
 | **Prisma ORM**   | Type-safe database toolkit         |
 | **MySQL**        | Relational database                |
-| **Railway**      | Cloud hosting (optional)           |
+| **Railway**      | Cloud hosting                      |
 
 ---
 
