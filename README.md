@@ -1,63 +1,53 @@
 # 🚀 TemplateUI — UI Template Publishing Platform
 
-**TemplateUI** is a web platform where developers can **publish** and **browse** UI components like navbars, hero sections, footers, and more.
+**TemplateUI** is a modern web platform where developers can **publish**, **browse**, and **view** ready-to-use UI components — such as navbars, hero sections, footers, and more.
 
-Built with **Next.js 15**, **Prisma**, **TailwindCSS**, and **MySQL**.
+🌐 **Live Demo:** [templateui.up.railway.app](https://templateui.up.railway.app)
 
 ---
 
 ## 🧩 Features
 
-- 🔼 **Publish your own UI templates** (title, type, code snippet)
+- 🔼 **Publish UI templates** with a title, type (e.g., navbar, footer), and code
 - 🌐 **Explore templates** published by other developers
-- 🛠 **API Routes** using Next.js App Router (app/api)
-- 📦 Integrated with MySQL using Prisma ORM
+- 👀 **Detailed view** for each template with code and author info
+- 👤 **User profiles** displaying their published templates
+- 🛠 **API routes** via Next.js App Router (`app/api`)
+- 💾 **Database integration** with Prisma ORM & MySQL
 
 ---
 
 ## 🖼️ UI Preview
 
-### 📂 Template Page
-Displays a list of all published templates.
-
+### 📂 Templates Page
+Browse all published UI templates  
 ![template-page](./docs/screens/templates-page.png)
 
----
-
 ### 📤 Upload Page
-Form to publish a new template with title, type (navbar, footer, etc.), and HTML/CSS & Tailwind CSS code.
-
+Publish a new template using a form  
 ![upload-page](./docs/screens/upload-page.png)
 
----
-
 ### 👀 Template Detail Page
-View full template info, codes and author profile.
-
+View full code, author, and template type  
 ![template-detail](./docs/screens/template-detail.png)
 
----
-
-### 👤 Profile Page
-Displays author’s nickname, avatar, and their published templates.  
-
+### 👤 Profile Page  
+Shows user avatar, nickname, and their published templates  
 ![profile-page](./docs/screens/profile.png)
 
 ---
 
-## 📚 Tech Stack
-
+## 🧪 Tech Stack
 
 | Tech         | Description                          |
 |--------------|--------------------------------------|
-| Next.js 15   | React-based full-stack framework     |
-| TypeScript   | Type-safe JavaScript                 |
-| TailwindCSS  | Utility-first CSS framework          |
-| GSAP         | Smooth UI animations and transitions |
-| Prisma ORM   | Type-safe database toolkit           |
-| MySQL        | Relational database                  |
-| Railway      | (Optional) Cloud deployment          |
-
+| **Next.js 15**   | Full-stack React framework         |
+| **TypeScript**   | Strongly typed JavaScript          |
+| **TailwindCSS**  | Utility-first CSS framework        |
+| **GSAP**         | Smooth UI animations               |
+| **Prisma ORM**   | Type-safe database toolkit         |
+| **MySQL**        | Relational database                |
+| **Railway**      | Cloud hosting (optional)           |
 
 ---
 
@@ -71,11 +61,11 @@ git clone https://github.com/samlovv/template-website.git
 cd template-website
 npm install
 
-# 3. Set up .env file
+# 3. Configure environment variables
 cp .env.example .env
-# Add your DATABASE_URL, PUBLIC_API_URL, etc.
+# Add your DATABASE_URL, NEXTAUTH_SECRET, etc.
 
-# 4. Push database schema
+# 4. Push Prisma schema to the database
 npx prisma db push
 
 # 5. Run the development server
