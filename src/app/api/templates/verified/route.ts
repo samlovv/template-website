@@ -4,36 +4,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
 
-
-export async function POST(req: Request) {
-  const session = await getServerSession(authOptions);
-  
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  try{
-    const {html, css, tailwind, category} = await req.json()
-
-    const post = await prisma.template.create({
-      data:{
-        html,
-        css,
-        tailwind,
-        userId: session.user.id,
-        category,
-      }
-    })
-
-    return NextResponse.json(post, { status: 201 })
-  } catch (error){
-    return NextResponse.json(
-      { error: 'Ошибка при создании поста' },
-      { status: 500 })
-  }
-  
-}
-
 export async function GET() {
   /* const templates = await prisma.template.findMany({ 
     where:{
@@ -56,6 +26,7 @@ export async function GET() {
         previewUrl: true,
         category: true,
         tailwind: true,
+        view: true,
         user: {
           select: {
             nickname: true,

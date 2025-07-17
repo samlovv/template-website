@@ -2346,10 +2346,12 @@ export namespace Prisma {
 
   export type TemplateAvgAggregateOutputType = {
     id: number | null
+    view: number | null
   }
 
   export type TemplateSumAggregateOutputType = {
     id: number | null
+    view: number | null
   }
 
   export type TemplateMinAggregateOutputType = {
@@ -2362,6 +2364,7 @@ export namespace Prisma {
     category: $Enums.Category | null
     userId: string | null
     createdAt: Date | null
+    view: number | null
   }
 
   export type TemplateMaxAggregateOutputType = {
@@ -2374,6 +2377,7 @@ export namespace Prisma {
     category: $Enums.Category | null
     userId: string | null
     createdAt: Date | null
+    view: number | null
   }
 
   export type TemplateCountAggregateOutputType = {
@@ -2386,16 +2390,19 @@ export namespace Prisma {
     category: number
     userId: number
     createdAt: number
+    view: number
     _all: number
   }
 
 
   export type TemplateAvgAggregateInputType = {
     id?: true
+    view?: true
   }
 
   export type TemplateSumAggregateInputType = {
     id?: true
+    view?: true
   }
 
   export type TemplateMinAggregateInputType = {
@@ -2408,6 +2415,7 @@ export namespace Prisma {
     category?: true
     userId?: true
     createdAt?: true
+    view?: true
   }
 
   export type TemplateMaxAggregateInputType = {
@@ -2420,6 +2428,7 @@ export namespace Prisma {
     category?: true
     userId?: true
     createdAt?: true
+    view?: true
   }
 
   export type TemplateCountAggregateInputType = {
@@ -2432,6 +2441,7 @@ export namespace Prisma {
     category?: true
     userId?: true
     createdAt?: true
+    view?: true
     _all?: true
   }
 
@@ -2531,6 +2541,7 @@ export namespace Prisma {
     category: $Enums.Category
     userId: string
     createdAt: Date
+    view: number
     _count: TemplateCountAggregateOutputType | null
     _avg: TemplateAvgAggregateOutputType | null
     _sum: TemplateSumAggregateOutputType | null
@@ -2562,6 +2573,7 @@ export namespace Prisma {
     category?: boolean
     userId?: boolean
     createdAt?: boolean
+    view?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["template"]>
 
@@ -2577,9 +2589,10 @@ export namespace Prisma {
     category?: boolean
     userId?: boolean
     createdAt?: boolean
+    view?: boolean
   }
 
-  export type TemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "html" | "css" | "tailwind" | "status" | "previewUrl" | "category" | "userId" | "createdAt", ExtArgs["result"]["template"]>
+  export type TemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "html" | "css" | "tailwind" | "status" | "previewUrl" | "category" | "userId" | "createdAt" | "view", ExtArgs["result"]["template"]>
   export type TemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2599,6 +2612,7 @@ export namespace Prisma {
       category: $Enums.Category
       userId: string
       createdAt: Date
+      view: number
     }, ExtArgs["result"]["template"]>
     composites: {}
   }
@@ -2978,6 +2992,7 @@ export namespace Prisma {
     readonly category: FieldRef<"Template", 'Category'>
     readonly userId: FieldRef<"Template", 'String'>
     readonly createdAt: FieldRef<"Template", 'DateTime'>
+    readonly view: FieldRef<"Template", 'Int'>
   }
     
 
@@ -6193,7 +6208,8 @@ export namespace Prisma {
     previewUrl: 'previewUrl',
     category: 'category',
     userId: 'userId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    view: 'view'
   };
 
   export type TemplateScalarFieldEnum = (typeof TemplateScalarFieldEnum)[keyof typeof TemplateScalarFieldEnum]
@@ -6456,6 +6472,7 @@ export namespace Prisma {
     category?: EnumCategoryFilter<"Template"> | $Enums.Category
     userId?: StringFilter<"Template"> | string
     createdAt?: DateTimeFilter<"Template"> | Date | string
+    view?: IntFilter<"Template"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -6469,6 +6486,7 @@ export namespace Prisma {
     category?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    view?: SortOrder
     user?: UserOrderByWithRelationInput
     _relevance?: TemplateOrderByRelevanceInput
   }
@@ -6486,6 +6504,7 @@ export namespace Prisma {
     category?: EnumCategoryFilter<"Template"> | $Enums.Category
     userId?: StringFilter<"Template"> | string
     createdAt?: DateTimeFilter<"Template"> | Date | string
+    view?: IntFilter<"Template"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -6499,6 +6518,7 @@ export namespace Prisma {
     category?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    view?: SortOrder
     _count?: TemplateCountOrderByAggregateInput
     _avg?: TemplateAvgOrderByAggregateInput
     _max?: TemplateMaxOrderByAggregateInput
@@ -6519,6 +6539,7 @@ export namespace Prisma {
     category?: EnumCategoryWithAggregatesFilter<"Template"> | $Enums.Category
     userId?: StringWithAggregatesFilter<"Template"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Template"> | Date | string
+    view?: IntWithAggregatesFilter<"Template"> | number
   }
 
   export type AccountWhereInput = {
@@ -6800,6 +6821,7 @@ export namespace Prisma {
     previewUrl?: string | null
     category: $Enums.Category
     createdAt?: Date | string
+    view?: number
     user: UserCreateNestedOneWithoutPostsInput
   }
 
@@ -6813,6 +6835,7 @@ export namespace Prisma {
     category: $Enums.Category
     userId: string
     createdAt?: Date | string
+    view?: number
   }
 
   export type TemplateUpdateInput = {
@@ -6823,6 +6846,7 @@ export namespace Prisma {
     previewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
 
@@ -6836,6 +6860,7 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
   }
 
   export type TemplateCreateManyInput = {
@@ -6848,6 +6873,7 @@ export namespace Prisma {
     category: $Enums.Category
     userId: string
     createdAt?: Date | string
+    view?: number
   }
 
   export type TemplateUpdateManyMutationInput = {
@@ -6858,6 +6884,7 @@ export namespace Prisma {
     previewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
   }
 
   export type TemplateUncheckedUpdateManyInput = {
@@ -6870,6 +6897,7 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
   }
 
   export type AccountCreateInput = {
@@ -7307,10 +7335,12 @@ export namespace Prisma {
     category?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    view?: SortOrder
   }
 
   export type TemplateAvgOrderByAggregateInput = {
     id?: SortOrder
+    view?: SortOrder
   }
 
   export type TemplateMaxOrderByAggregateInput = {
@@ -7323,6 +7353,7 @@ export namespace Prisma {
     category?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    view?: SortOrder
   }
 
   export type TemplateMinOrderByAggregateInput = {
@@ -7335,10 +7366,12 @@ export namespace Prisma {
     category?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    view?: SortOrder
   }
 
   export type TemplateSumOrderByAggregateInput = {
     id?: SortOrder
+    view?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7710,20 +7743,20 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
-    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
-    upsert?: UserUpsertWithoutPostsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
+    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
+    upsert?: UserUpsertWithoutPostsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -8086,6 +8119,7 @@ export namespace Prisma {
     previewUrl?: string | null
     category: $Enums.Category
     createdAt?: Date | string
+    view?: number
   }
 
   export type TemplateUncheckedCreateWithoutUserInput = {
@@ -8097,6 +8131,7 @@ export namespace Prisma {
     previewUrl?: string | null
     category: $Enums.Category
     createdAt?: Date | string
+    view?: number
   }
 
   export type TemplateCreateOrConnectWithoutUserInput = {
@@ -8198,6 +8233,7 @@ export namespace Prisma {
     category?: EnumCategoryFilter<"Template"> | $Enums.Category
     userId?: StringFilter<"Template"> | string
     createdAt?: DateTimeFilter<"Template"> | Date | string
+    view?: IntFilter<"Template"> | number
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -8421,6 +8457,7 @@ export namespace Prisma {
     previewUrl?: string | null
     category: $Enums.Category
     createdAt?: Date | string
+    view?: number
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -8491,6 +8528,7 @@ export namespace Prisma {
     previewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
   }
 
   export type TemplateUncheckedUpdateWithoutUserInput = {
@@ -8502,6 +8540,7 @@ export namespace Prisma {
     previewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
   }
 
   export type TemplateUncheckedUpdateManyWithoutUserInput = {
@@ -8513,6 +8552,7 @@ export namespace Prisma {
     previewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
   }
 
 

@@ -139,7 +139,8 @@ exports.Prisma.TemplateScalarFieldEnum = {
   previewUrl: 'previewUrl',
   category: 'category',
   userId: 'userId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  view: 'view'
 };
 
 exports.Prisma.AccountScalarFieldEnum = {

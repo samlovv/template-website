@@ -43,6 +43,7 @@ model Template {
   userId     String
   user       User     @relation(fields: [userId], references: [id])
   createdAt  DateTime @default(now())
+  view       Int      @default(0)
 }
 
 model Account {

@@ -58,7 +58,11 @@ export default function TemplateEdit({ id }: { id: string }) {
     image: string;
   };
 
-  
+  useEffect(() => {
+    fetch(`/api/templates/verified/views/${id}`, {
+      method: 'POST',
+    });
+  }, [id]);
 
 
   useEffect(() => {
