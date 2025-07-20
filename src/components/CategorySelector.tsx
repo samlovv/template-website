@@ -65,7 +65,7 @@ export default function CategorySelector({ selected, setSelected }: Props) {
               key={category.value}
               onClick={() => setSelected(category.value)}
               className={clsx(
-                "flex items-center gap-3 px-4 py-2 rounded-md transition-colors",
+                "flex items-center cursor-pointer gap-3 px-4 py-2 rounded-md transition-colors",
                 isActive
                   ? "bg-white/10 text-white"
                   : "text-gray-400 hover:bg-white/5 hover:text-white"

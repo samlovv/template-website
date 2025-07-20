@@ -6,7 +6,7 @@ import { useSession, signOut } from "next-auth/react"
 import RouteLoading from './RouteLoading'
 import Image from 'next/image'
 import Templatelogo from '@/assets/icons/Group 1 (2).svg'
-import { Plus, ChevronDown, ChevronUp, Rocket, Menu, X, Heart, LogOut, UserRound } from "lucide-react"
+import { Plus, ChevronDown, ChevronUp, Rocket, Menu, X, LogOut, UserRound, Bookmark, Folder } from "lucide-react"
 import ProfileCard from './ProfileCard'
 
 const Navbar = () => {
@@ -86,7 +86,10 @@ const Navbar = () => {
             <Plus size={20} /> Create
           </Link>
           <Link onClick={()=> setIsMobileMenuOpen(false)} href='/templates' className='flex items-center gap-2 text-white hover:bg-white/10 p-2 rounded-md'>
-            📁 Templates
+            <Folder size={20} />  Templates
+          </Link>
+          <Link onClick={()=> setIsMobileMenuOpen(false)} href='/saved' className='flex items-center gap-2 text-white hover:bg-white/10 p-2 rounded-md'>
+            <Bookmark size={20} /> Favorites
           </Link>
           {session ? (
             <button onClick={() => signOut()} className='flex items-center gap-2 text-white hover:bg-white/10 p-2 rounded-md'>

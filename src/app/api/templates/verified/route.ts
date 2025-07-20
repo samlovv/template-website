@@ -5,20 +5,7 @@ import { authOptions } from "@/lib/auth";
 
 
 export async function GET() {
-  /* const templates = await prisma.template.findMany({ 
-    where:{
-      status: "Verified"
-    },
-    orderBy: { 
-      createdAt: 'desc'
-     },
-    include: {
-      user:{
-        select:{
-          nickname: true
-        }
-      }
-    } }) */
+ 
    const templates = await prisma.template.findMany({
       where: { status: 'Verified' },
       select: {
@@ -30,6 +17,11 @@ export async function GET() {
         user: {
           select: {
             nickname: true,
+          },
+        },
+        _count: {
+          select: {
+            savedBy: true, // 👈 число сохранений
           },
         },
       },

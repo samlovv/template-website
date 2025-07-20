@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Задаем маршруты
-const protectedRoutes = [ "/profile", "/create"]; // для авторизованных
+const protectedRoutes = [ "/profile", "/create", "/saved"]; // для авторизованных
 const adminRoutes = ["/admin"]; // только для админов
 
 export async function middleware(req: NextRequest) {
@@ -43,5 +43,6 @@ export const config = {
     "/profile/:path*",
     "/create",
     "/admin",
+    "/saved",
   ],
 };

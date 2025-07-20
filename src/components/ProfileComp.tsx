@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import clsx from "clsx";
-import {Search, ShieldX, StickyNote, CodeXml} from "lucide-react"
+import {Search, ShieldX, StickyNote, CodeXml, Bookmark} from "lucide-react"
 import Link from "next/link";
 
 
@@ -19,6 +19,9 @@ type Template = {
   tailwind: boolean;
   previewUrl: string;
   component: React.ReactNode;
+  _count: {
+    savedBy: number; // количество сохранений
+  };
 };
 
 export default function ProfilePage() {
@@ -124,7 +127,12 @@ export default function ProfilePage() {
                               {hoveredId === t.id? (<button className='text-white flex bg-[#191919] w-36 gap-3 rounded-xl absolute right-4 bottom-4 cursor-pointer hover:bg-[#262626] p-3'><CodeXml/> Get Code </button>): null}
                               
                     </Link>
-                    <div className='absolute flex justify-between w-full px-2 bottom-[-34px] float-right mt-3 font-sans text-lg'><span className='text-[#9c9c9c] text-[16px]'>{t.category}</span></div>
+                    <div className='absolute flex justify-between w-full px-2 bottom-[-40px] float-right font-sans items-center text-lg'>
+                  <div className='flex gap-6'><span className='text-[#b4b4b4] sm:text-[16px] text-[13px]'>{t.category}</span></div>
+                  <div className='flex items-center gap-7'><span className='sm:text-[16px] text-[13px] flex gap-1 text-[#b4b4b4]'>{t.view} views</span>
+                  <div className='flex items-center'>
+                    <span className='sm:text-[16px] text-[13px]'>{t._count.savedBy}</span> <button className='transition-all cursor-pointer rounded-md p-2'><Bookmark/></button>
+                    </div></div></div>
                   </div>))}
                 </div>
                 : 

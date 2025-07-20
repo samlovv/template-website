@@ -5,7 +5,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { useLoading } from './loading-context'
-import {CodeXml, Eye} from 'lucide-react'
+import {CodeXml, Eye, Bookmark} from 'lucide-react'
 import tailwindsvg from "@/assets/icons/tailwind-css-svgrepo-com.svg"
 import csssvg from "@/assets/icons/css3-svgrepo-com.svg"
 import Image from 'next/image'
@@ -29,6 +29,9 @@ type Template = {
   user: User[];
   previewUrl: string;
   view: number;
+  _count: {
+    savedBy: number; // количество сохранений
+  };
 };
 
 type User = {
@@ -52,7 +55,7 @@ const TemplateComp = () => {
       const res = await fetch('/api/templates/verified')
       const templates = await res.json()
       
-      
+      console.log(templates)
       setTemplates(templates)
       hide()
     }
@@ -166,7 +169,12 @@ const TemplateComp = () => {
                           {hoveredId === t.id? (<button className='flex bg-[#191919] w-36 gap-3 rounded-xl absolute right-4 bottom-4 cursor-pointer hover:bg-[#262626] p-3'><CodeXml/> Get Code </button>): null}
                           
                 </Link>
-                <div className='absolute flex justify-between w-full px-2 bottom-[-40px] float-right font-sans items-center text-lg'><span className='text-[16px]'>{t.user.nickname}</span><span className='text-[16px] flex gap-1 text-[#b4b4b4]'><Eye/>{t.view}</span><span className='text-[#b4b4b4] text-[16px]'>{t.category}</span> <button className='transition-all cursor-pointer rounded-md p-2 px-4 hover:bg-white/20' onClick={()=>save(t.id)}>Save</button></div>
+                <div className='absolute flex justify-between w-full px-2 bottom-[-40px] float-right font-sans items-center text-lg'>
+                  <div className='flex gap-6'><span className='sm:text-[16px] text-[13px]'>{t.user.nickname}</span><span className='text-[#b4b4b4] sm:text-[16px] text-[13px]'>{t.category}</span></div>
+                  <div className='flex items-center gap-7'><span className='sm:text-[16px] text-[13px] flex gap-1 text-[#b4b4b4]'>{t.view} views</span>
+                  <div className='flex items-center'>
+                    <span className='sm:text-[16px] text-[13px]'>{t._count.savedBy}</span> <button className='transition-all cursor-pointer rounded-md p-2 hover:bg-white/20' onClick={()=>save(t.id)}><Bookmark/></button>
+                    </div></div></div>
               </div>))}
             </div>
           </div>

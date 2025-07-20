@@ -21,6 +21,12 @@ export async function GET() {
             previewUrl: true,
             category: true,
             tailwind: true,
+            view: true,
+            _count: {
+                select: {
+                    savedBy: true, // количество сохранений
+                },
+            },
         },
             orderBy: {
             createdAt: 'desc'
