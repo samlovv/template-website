@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Template = $Result.DefaultSelection<Prisma.$TemplatePayload>
 /**
+ * Model SavedTemplate
+ * 
+ */
+export type SavedTemplate = $Result.DefaultSelection<Prisma.$SavedTemplatePayload>
+/**
  * Model Account
  * 
  */
@@ -241,6 +246,16 @@ export class PrismaClient<
     * ```
     */
   get template(): Prisma.TemplateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.savedTemplate`: Exposes CRUD operations for the **SavedTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SavedTemplates
+    * const savedTemplates = await prisma.savedTemplate.findMany()
+    * ```
+    */
+  get savedTemplate(): Prisma.SavedTemplateDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -713,6 +728,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Template: 'Template',
+    SavedTemplate: 'SavedTemplate',
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken'
@@ -734,7 +750,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "template" | "account" | "session" | "verificationToken"
+      modelProps: "user" | "template" | "savedTemplate" | "account" | "session" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -867,6 +883,72 @@ export namespace Prisma {
           count: {
             args: Prisma.TemplateCountArgs<ExtArgs>
             result: $Utils.Optional<TemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      SavedTemplate: {
+        payload: Prisma.$SavedTemplatePayload<ExtArgs>
+        fields: Prisma.SavedTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SavedTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SavedTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.SavedTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SavedTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.SavedTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.SavedTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.SavedTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.SavedTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload>
+          }
+          update: {
+            args: Prisma.SavedTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.SavedTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SavedTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SavedTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.SavedTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSavedTemplate>
+          }
+          groupBy: {
+            args: Prisma.SavedTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SavedTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SavedTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<SavedTemplateCountAggregateOutputType> | number
           }
         }
       }
@@ -1154,6 +1236,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     template?: TemplateOmit
+    savedTemplate?: SavedTemplateOmit
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
@@ -1254,12 +1337,14 @@ export namespace Prisma {
     accounts: number
     sessions: number
     posts: number
+    savedTemplates: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    savedTemplates?: boolean | UserCountOutputTypeCountSavedTemplatesArgs
   }
 
   // Custom InputTypes
@@ -1292,6 +1377,44 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TemplateWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSavedTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SavedTemplateWhereInput
+  }
+
+
+  /**
+   * Count Type TemplateCountOutputType
+   */
+
+  export type TemplateCountOutputType = {
+    savedBy: number
+  }
+
+  export type TemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    savedBy?: boolean | TemplateCountOutputTypeCountSavedByArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TemplateCountOutputType without action
+   */
+  export type TemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemplateCountOutputType
+     */
+    select?: TemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TemplateCountOutputType without action
+   */
+  export type TemplateCountOutputTypeCountSavedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SavedTemplateWhereInput
   }
 
 
@@ -1482,6 +1605,7 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    savedTemplates?: boolean | User$savedTemplatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1502,6 +1626,7 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    savedTemplates?: boolean | User$savedTemplatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1511,6 +1636,7 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       posts: Prisma.$TemplatePayload<ExtArgs>[]
+      savedTemplates: Prisma.$SavedTemplatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1863,6 +1989,7 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    savedTemplates<T extends User$savedTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, User$savedTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2314,6 +2441,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.savedTemplates
+   */
+  export type User$savedTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    where?: SavedTemplateWhereInput
+    orderBy?: SavedTemplateOrderByWithRelationInput | SavedTemplateOrderByWithRelationInput[]
+    cursor?: SavedTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SavedTemplateScalarFieldEnum | SavedTemplateScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2575,6 +2726,8 @@ export namespace Prisma {
     createdAt?: boolean
     view?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    savedBy?: boolean | Template$savedByArgs<ExtArgs>
+    _count?: boolean | TemplateCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["template"]>
 
 
@@ -2595,12 +2748,15 @@ export namespace Prisma {
   export type TemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "html" | "css" | "tailwind" | "status" | "previewUrl" | "category" | "userId" | "createdAt" | "view", ExtArgs["result"]["template"]>
   export type TemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    savedBy?: boolean | Template$savedByArgs<ExtArgs>
+    _count?: boolean | TemplateCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $TemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Template"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      savedBy: Prisma.$SavedTemplatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2954,6 +3110,7 @@ export namespace Prisma {
   export interface Prisma__TemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    savedBy<T extends Template$savedByArgs<ExtArgs> = {}>(args?: Subset<T, Template$savedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3336,6 +3493,30 @@ export namespace Prisma {
   }
 
   /**
+   * Template.savedBy
+   */
+  export type Template$savedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    where?: SavedTemplateWhereInput
+    orderBy?: SavedTemplateOrderByWithRelationInput | SavedTemplateOrderByWithRelationInput[]
+    cursor?: SavedTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SavedTemplateScalarFieldEnum | SavedTemplateScalarFieldEnum[]
+  }
+
+  /**
    * Template without action
    */
   export type TemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3351,6 +3532,951 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TemplateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SavedTemplate
+   */
+
+  export type AggregateSavedTemplate = {
+    _count: SavedTemplateCountAggregateOutputType | null
+    _avg: SavedTemplateAvgAggregateOutputType | null
+    _sum: SavedTemplateSumAggregateOutputType | null
+    _min: SavedTemplateMinAggregateOutputType | null
+    _max: SavedTemplateMaxAggregateOutputType | null
+  }
+
+  export type SavedTemplateAvgAggregateOutputType = {
+    templateId: number | null
+  }
+
+  export type SavedTemplateSumAggregateOutputType = {
+    templateId: number | null
+  }
+
+  export type SavedTemplateMinAggregateOutputType = {
+    userId: string | null
+    templateId: number | null
+    createdAt: Date | null
+  }
+
+  export type SavedTemplateMaxAggregateOutputType = {
+    userId: string | null
+    templateId: number | null
+    createdAt: Date | null
+  }
+
+  export type SavedTemplateCountAggregateOutputType = {
+    userId: number
+    templateId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type SavedTemplateAvgAggregateInputType = {
+    templateId?: true
+  }
+
+  export type SavedTemplateSumAggregateInputType = {
+    templateId?: true
+  }
+
+  export type SavedTemplateMinAggregateInputType = {
+    userId?: true
+    templateId?: true
+    createdAt?: true
+  }
+
+  export type SavedTemplateMaxAggregateInputType = {
+    userId?: true
+    templateId?: true
+    createdAt?: true
+  }
+
+  export type SavedTemplateCountAggregateInputType = {
+    userId?: true
+    templateId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type SavedTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SavedTemplate to aggregate.
+     */
+    where?: SavedTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedTemplates to fetch.
+     */
+    orderBy?: SavedTemplateOrderByWithRelationInput | SavedTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SavedTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SavedTemplates
+    **/
+    _count?: true | SavedTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SavedTemplateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SavedTemplateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SavedTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SavedTemplateMaxAggregateInputType
+  }
+
+  export type GetSavedTemplateAggregateType<T extends SavedTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateSavedTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSavedTemplate[P]>
+      : GetScalarType<T[P], AggregateSavedTemplate[P]>
+  }
+
+
+
+
+  export type SavedTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SavedTemplateWhereInput
+    orderBy?: SavedTemplateOrderByWithAggregationInput | SavedTemplateOrderByWithAggregationInput[]
+    by: SavedTemplateScalarFieldEnum[] | SavedTemplateScalarFieldEnum
+    having?: SavedTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SavedTemplateCountAggregateInputType | true
+    _avg?: SavedTemplateAvgAggregateInputType
+    _sum?: SavedTemplateSumAggregateInputType
+    _min?: SavedTemplateMinAggregateInputType
+    _max?: SavedTemplateMaxAggregateInputType
+  }
+
+  export type SavedTemplateGroupByOutputType = {
+    userId: string
+    templateId: number
+    createdAt: Date
+    _count: SavedTemplateCountAggregateOutputType | null
+    _avg: SavedTemplateAvgAggregateOutputType | null
+    _sum: SavedTemplateSumAggregateOutputType | null
+    _min: SavedTemplateMinAggregateOutputType | null
+    _max: SavedTemplateMaxAggregateOutputType | null
+  }
+
+  type GetSavedTemplateGroupByPayload<T extends SavedTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SavedTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SavedTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SavedTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], SavedTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SavedTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    templateId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["savedTemplate"]>
+
+
+
+  export type SavedTemplateSelectScalar = {
+    userId?: boolean
+    templateId?: boolean
+    createdAt?: boolean
+  }
+
+  export type SavedTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "templateId" | "createdAt", ExtArgs["result"]["savedTemplate"]>
+  export type SavedTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
+  }
+
+  export type $SavedTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SavedTemplate"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      template: Prisma.$TemplatePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userId: string
+      templateId: number
+      createdAt: Date
+    }, ExtArgs["result"]["savedTemplate"]>
+    composites: {}
+  }
+
+  type SavedTemplateGetPayload<S extends boolean | null | undefined | SavedTemplateDefaultArgs> = $Result.GetResult<Prisma.$SavedTemplatePayload, S>
+
+  type SavedTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SavedTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SavedTemplateCountAggregateInputType | true
+    }
+
+  export interface SavedTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SavedTemplate'], meta: { name: 'SavedTemplate' } }
+    /**
+     * Find zero or one SavedTemplate that matches the filter.
+     * @param {SavedTemplateFindUniqueArgs} args - Arguments to find a SavedTemplate
+     * @example
+     * // Get one SavedTemplate
+     * const savedTemplate = await prisma.savedTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SavedTemplateFindUniqueArgs>(args: SelectSubset<T, SavedTemplateFindUniqueArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SavedTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SavedTemplateFindUniqueOrThrowArgs} args - Arguments to find a SavedTemplate
+     * @example
+     * // Get one SavedTemplate
+     * const savedTemplate = await prisma.savedTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SavedTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, SavedTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SavedTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedTemplateFindFirstArgs} args - Arguments to find a SavedTemplate
+     * @example
+     * // Get one SavedTemplate
+     * const savedTemplate = await prisma.savedTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SavedTemplateFindFirstArgs>(args?: SelectSubset<T, SavedTemplateFindFirstArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SavedTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedTemplateFindFirstOrThrowArgs} args - Arguments to find a SavedTemplate
+     * @example
+     * // Get one SavedTemplate
+     * const savedTemplate = await prisma.savedTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SavedTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, SavedTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SavedTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SavedTemplates
+     * const savedTemplates = await prisma.savedTemplate.findMany()
+     * 
+     * // Get first 10 SavedTemplates
+     * const savedTemplates = await prisma.savedTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const savedTemplateWithUserIdOnly = await prisma.savedTemplate.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends SavedTemplateFindManyArgs>(args?: SelectSubset<T, SavedTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SavedTemplate.
+     * @param {SavedTemplateCreateArgs} args - Arguments to create a SavedTemplate.
+     * @example
+     * // Create one SavedTemplate
+     * const SavedTemplate = await prisma.savedTemplate.create({
+     *   data: {
+     *     // ... data to create a SavedTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends SavedTemplateCreateArgs>(args: SelectSubset<T, SavedTemplateCreateArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SavedTemplates.
+     * @param {SavedTemplateCreateManyArgs} args - Arguments to create many SavedTemplates.
+     * @example
+     * // Create many SavedTemplates
+     * const savedTemplate = await prisma.savedTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SavedTemplateCreateManyArgs>(args?: SelectSubset<T, SavedTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SavedTemplate.
+     * @param {SavedTemplateDeleteArgs} args - Arguments to delete one SavedTemplate.
+     * @example
+     * // Delete one SavedTemplate
+     * const SavedTemplate = await prisma.savedTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one SavedTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SavedTemplateDeleteArgs>(args: SelectSubset<T, SavedTemplateDeleteArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SavedTemplate.
+     * @param {SavedTemplateUpdateArgs} args - Arguments to update one SavedTemplate.
+     * @example
+     * // Update one SavedTemplate
+     * const savedTemplate = await prisma.savedTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SavedTemplateUpdateArgs>(args: SelectSubset<T, SavedTemplateUpdateArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SavedTemplates.
+     * @param {SavedTemplateDeleteManyArgs} args - Arguments to filter SavedTemplates to delete.
+     * @example
+     * // Delete a few SavedTemplates
+     * const { count } = await prisma.savedTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SavedTemplateDeleteManyArgs>(args?: SelectSubset<T, SavedTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SavedTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SavedTemplates
+     * const savedTemplate = await prisma.savedTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SavedTemplateUpdateManyArgs>(args: SelectSubset<T, SavedTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SavedTemplate.
+     * @param {SavedTemplateUpsertArgs} args - Arguments to update or create a SavedTemplate.
+     * @example
+     * // Update or create a SavedTemplate
+     * const savedTemplate = await prisma.savedTemplate.upsert({
+     *   create: {
+     *     // ... data to create a SavedTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SavedTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SavedTemplateUpsertArgs>(args: SelectSubset<T, SavedTemplateUpsertArgs<ExtArgs>>): Prisma__SavedTemplateClient<$Result.GetResult<Prisma.$SavedTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SavedTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedTemplateCountArgs} args - Arguments to filter SavedTemplates to count.
+     * @example
+     * // Count the number of SavedTemplates
+     * const count = await prisma.savedTemplate.count({
+     *   where: {
+     *     // ... the filter for the SavedTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends SavedTemplateCountArgs>(
+      args?: Subset<T, SavedTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SavedTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SavedTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SavedTemplateAggregateArgs>(args: Subset<T, SavedTemplateAggregateArgs>): Prisma.PrismaPromise<GetSavedTemplateAggregateType<T>>
+
+    /**
+     * Group by SavedTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SavedTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SavedTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: SavedTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SavedTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSavedTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SavedTemplate model
+   */
+  readonly fields: SavedTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SavedTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SavedTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    template<T extends TemplateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TemplateDefaultArgs<ExtArgs>>): Prisma__TemplateClient<$Result.GetResult<Prisma.$TemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SavedTemplate model
+   */
+  interface SavedTemplateFieldRefs {
+    readonly userId: FieldRef<"SavedTemplate", 'String'>
+    readonly templateId: FieldRef<"SavedTemplate", 'Int'>
+    readonly createdAt: FieldRef<"SavedTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SavedTemplate findUnique
+   */
+  export type SavedTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedTemplate to fetch.
+     */
+    where: SavedTemplateWhereUniqueInput
+  }
+
+  /**
+   * SavedTemplate findUniqueOrThrow
+   */
+  export type SavedTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedTemplate to fetch.
+     */
+    where: SavedTemplateWhereUniqueInput
+  }
+
+  /**
+   * SavedTemplate findFirst
+   */
+  export type SavedTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedTemplate to fetch.
+     */
+    where?: SavedTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedTemplates to fetch.
+     */
+    orderBy?: SavedTemplateOrderByWithRelationInput | SavedTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SavedTemplates.
+     */
+    cursor?: SavedTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SavedTemplates.
+     */
+    distinct?: SavedTemplateScalarFieldEnum | SavedTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * SavedTemplate findFirstOrThrow
+   */
+  export type SavedTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedTemplate to fetch.
+     */
+    where?: SavedTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedTemplates to fetch.
+     */
+    orderBy?: SavedTemplateOrderByWithRelationInput | SavedTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SavedTemplates.
+     */
+    cursor?: SavedTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SavedTemplates.
+     */
+    distinct?: SavedTemplateScalarFieldEnum | SavedTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * SavedTemplate findMany
+   */
+  export type SavedTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedTemplates to fetch.
+     */
+    where?: SavedTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedTemplates to fetch.
+     */
+    orderBy?: SavedTemplateOrderByWithRelationInput | SavedTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SavedTemplates.
+     */
+    cursor?: SavedTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedTemplates.
+     */
+    skip?: number
+    distinct?: SavedTemplateScalarFieldEnum | SavedTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * SavedTemplate create
+   */
+  export type SavedTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SavedTemplate.
+     */
+    data: XOR<SavedTemplateCreateInput, SavedTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * SavedTemplate createMany
+   */
+  export type SavedTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SavedTemplates.
+     */
+    data: SavedTemplateCreateManyInput | SavedTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SavedTemplate update
+   */
+  export type SavedTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SavedTemplate.
+     */
+    data: XOR<SavedTemplateUpdateInput, SavedTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which SavedTemplate to update.
+     */
+    where: SavedTemplateWhereUniqueInput
+  }
+
+  /**
+   * SavedTemplate updateMany
+   */
+  export type SavedTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SavedTemplates.
+     */
+    data: XOR<SavedTemplateUpdateManyMutationInput, SavedTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which SavedTemplates to update
+     */
+    where?: SavedTemplateWhereInput
+    /**
+     * Limit how many SavedTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SavedTemplate upsert
+   */
+  export type SavedTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SavedTemplate to update in case it exists.
+     */
+    where: SavedTemplateWhereUniqueInput
+    /**
+     * In case the SavedTemplate found by the `where` argument doesn't exist, create a new SavedTemplate with this data.
+     */
+    create: XOR<SavedTemplateCreateInput, SavedTemplateUncheckedCreateInput>
+    /**
+     * In case the SavedTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SavedTemplateUpdateInput, SavedTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * SavedTemplate delete
+   */
+  export type SavedTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which SavedTemplate to delete.
+     */
+    where: SavedTemplateWhereUniqueInput
+  }
+
+  /**
+   * SavedTemplate deleteMany
+   */
+  export type SavedTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SavedTemplates to delete
+     */
+    where?: SavedTemplateWhereInput
+    /**
+     * Limit how many SavedTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SavedTemplate without action
+   */
+  export type SavedTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedTemplate
+     */
+    select?: SavedTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SavedTemplate
+     */
+    omit?: SavedTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedTemplateInclude<ExtArgs> | null
   }
 
 
@@ -6215,6 +7341,15 @@ export namespace Prisma {
   export type TemplateScalarFieldEnum = (typeof TemplateScalarFieldEnum)[keyof typeof TemplateScalarFieldEnum]
 
 
+  export const SavedTemplateScalarFieldEnum: {
+    userId: 'userId',
+    templateId: 'templateId',
+    createdAt: 'createdAt'
+  };
+
+  export type SavedTemplateScalarFieldEnum = (typeof SavedTemplateScalarFieldEnum)[keyof typeof SavedTemplateScalarFieldEnum]
+
+
   export const AccountScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -6287,6 +7422,13 @@ export namespace Prisma {
   };
 
   export type TemplateOrderByRelevanceFieldEnum = (typeof TemplateOrderByRelevanceFieldEnum)[keyof typeof TemplateOrderByRelevanceFieldEnum]
+
+
+  export const SavedTemplateOrderByRelevanceFieldEnum: {
+    userId: 'userId'
+  };
+
+  export type SavedTemplateOrderByRelevanceFieldEnum = (typeof SavedTemplateOrderByRelevanceFieldEnum)[keyof typeof SavedTemplateOrderByRelevanceFieldEnum]
 
 
   export const AccountOrderByRelevanceFieldEnum: {
@@ -6401,6 +7543,7 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     posts?: TemplateListRelationFilter
+    savedTemplates?: SavedTemplateListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6414,6 +7557,7 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     posts?: TemplateOrderByRelationAggregateInput
+    savedTemplates?: SavedTemplateOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -6431,6 +7575,7 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     posts?: TemplateListRelationFilter
+    savedTemplates?: SavedTemplateListRelationFilter
   }, "id" | "email" | "nickname">
 
   export type UserOrderByWithAggregationInput = {
@@ -6474,6 +7619,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Template"> | Date | string
     view?: IntFilter<"Template"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    savedBy?: SavedTemplateListRelationFilter
   }
 
   export type TemplateOrderByWithRelationInput = {
@@ -6488,6 +7634,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     view?: SortOrder
     user?: UserOrderByWithRelationInput
+    savedBy?: SavedTemplateOrderByRelationAggregateInput
     _relevance?: TemplateOrderByRelevanceInput
   }
 
@@ -6506,6 +7653,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Template"> | Date | string
     view?: IntFilter<"Template"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    savedBy?: SavedTemplateListRelationFilter
   }, "id">
 
   export type TemplateOrderByWithAggregationInput = {
@@ -6540,6 +7688,58 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Template"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Template"> | Date | string
     view?: IntWithAggregatesFilter<"Template"> | number
+  }
+
+  export type SavedTemplateWhereInput = {
+    AND?: SavedTemplateWhereInput | SavedTemplateWhereInput[]
+    OR?: SavedTemplateWhereInput[]
+    NOT?: SavedTemplateWhereInput | SavedTemplateWhereInput[]
+    userId?: StringFilter<"SavedTemplate"> | string
+    templateId?: IntFilter<"SavedTemplate"> | number
+    createdAt?: DateTimeFilter<"SavedTemplate"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    template?: XOR<TemplateScalarRelationFilter, TemplateWhereInput>
+  }
+
+  export type SavedTemplateOrderByWithRelationInput = {
+    userId?: SortOrder
+    templateId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    template?: TemplateOrderByWithRelationInput
+    _relevance?: SavedTemplateOrderByRelevanceInput
+  }
+
+  export type SavedTemplateWhereUniqueInput = Prisma.AtLeast<{
+    userId_templateId?: SavedTemplateUserIdTemplateIdCompoundUniqueInput
+    AND?: SavedTemplateWhereInput | SavedTemplateWhereInput[]
+    OR?: SavedTemplateWhereInput[]
+    NOT?: SavedTemplateWhereInput | SavedTemplateWhereInput[]
+    userId?: StringFilter<"SavedTemplate"> | string
+    templateId?: IntFilter<"SavedTemplate"> | number
+    createdAt?: DateTimeFilter<"SavedTemplate"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    template?: XOR<TemplateScalarRelationFilter, TemplateWhereInput>
+  }, "userId_templateId">
+
+  export type SavedTemplateOrderByWithAggregationInput = {
+    userId?: SortOrder
+    templateId?: SortOrder
+    createdAt?: SortOrder
+    _count?: SavedTemplateCountOrderByAggregateInput
+    _avg?: SavedTemplateAvgOrderByAggregateInput
+    _max?: SavedTemplateMaxOrderByAggregateInput
+    _min?: SavedTemplateMinOrderByAggregateInput
+    _sum?: SavedTemplateSumOrderByAggregateInput
+  }
+
+  export type SavedTemplateScalarWhereWithAggregatesInput = {
+    AND?: SavedTemplateScalarWhereWithAggregatesInput | SavedTemplateScalarWhereWithAggregatesInput[]
+    OR?: SavedTemplateScalarWhereWithAggregatesInput[]
+    NOT?: SavedTemplateScalarWhereWithAggregatesInput | SavedTemplateScalarWhereWithAggregatesInput[]
+    userId?: StringWithAggregatesFilter<"SavedTemplate"> | string
+    templateId?: IntWithAggregatesFilter<"SavedTemplate"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"SavedTemplate"> | Date | string
   }
 
   export type AccountWhereInput = {
@@ -6742,6 +7942,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: TemplateCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6755,6 +7956,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: TemplateUncheckedCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6768,6 +7970,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: TemplateUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6781,6 +7984,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: TemplateUncheckedUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6823,6 +8027,7 @@ export namespace Prisma {
     createdAt?: Date | string
     view?: number
     user: UserCreateNestedOneWithoutPostsInput
+    savedBy?: SavedTemplateCreateNestedManyWithoutTemplateInput
   }
 
   export type TemplateUncheckedCreateInput = {
@@ -6836,6 +8041,7 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     view?: number
+    savedBy?: SavedTemplateUncheckedCreateNestedManyWithoutTemplateInput
   }
 
   export type TemplateUpdateInput = {
@@ -6848,6 +8054,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     view?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    savedBy?: SavedTemplateUpdateManyWithoutTemplateNestedInput
   }
 
   export type TemplateUncheckedUpdateInput = {
@@ -6861,6 +8068,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     view?: IntFieldUpdateOperationsInput | number
+    savedBy?: SavedTemplateUncheckedUpdateManyWithoutTemplateNestedInput
   }
 
   export type TemplateCreateManyInput = {
@@ -6898,6 +8106,46 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     view?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SavedTemplateCreateInput = {
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutSavedTemplatesInput
+    template: TemplateCreateNestedOneWithoutSavedByInput
+  }
+
+  export type SavedTemplateUncheckedCreateInput = {
+    userId: string
+    templateId: number
+    createdAt?: Date | string
+  }
+
+  export type SavedTemplateUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSavedTemplatesNestedInput
+    template?: TemplateUpdateOneRequiredWithoutSavedByNestedInput
+  }
+
+  export type SavedTemplateUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    templateId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedTemplateCreateManyInput = {
+    userId: string
+    templateId: number
+    createdAt?: Date | string
+  }
+
+  export type SavedTemplateUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedTemplateUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    templateId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateInput = {
@@ -7160,6 +8408,12 @@ export namespace Prisma {
     none?: TemplateWhereInput
   }
 
+  export type SavedTemplateListRelationFilter = {
+    every?: SavedTemplateWhereInput
+    some?: SavedTemplateWhereInput
+    none?: SavedTemplateWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -7174,6 +8428,10 @@ export namespace Prisma {
   }
 
   export type TemplateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SavedTemplateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7432,6 +8690,48 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type TemplateScalarRelationFilter = {
+    is?: TemplateWhereInput
+    isNot?: TemplateWhereInput
+  }
+
+  export type SavedTemplateOrderByRelevanceInput = {
+    fields: SavedTemplateOrderByRelevanceFieldEnum | SavedTemplateOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type SavedTemplateUserIdTemplateIdCompoundUniqueInput = {
+    userId: string
+    templateId: number
+  }
+
+  export type SavedTemplateCountOrderByAggregateInput = {
+    userId?: SortOrder
+    templateId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SavedTemplateAvgOrderByAggregateInput = {
+    templateId?: SortOrder
+  }
+
+  export type SavedTemplateMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    templateId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SavedTemplateMinOrderByAggregateInput = {
+    userId?: SortOrder
+    templateId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SavedTemplateSumOrderByAggregateInput = {
+    templateId?: SortOrder
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -7600,6 +8900,13 @@ export namespace Prisma {
     connect?: TemplateWhereUniqueInput | TemplateWhereUniqueInput[]
   }
 
+  export type SavedTemplateCreateNestedManyWithoutUserInput = {
+    create?: XOR<SavedTemplateCreateWithoutUserInput, SavedTemplateUncheckedCreateWithoutUserInput> | SavedTemplateCreateWithoutUserInput[] | SavedTemplateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutUserInput | SavedTemplateCreateOrConnectWithoutUserInput[]
+    createMany?: SavedTemplateCreateManyUserInputEnvelope
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -7619,6 +8926,13 @@ export namespace Prisma {
     connectOrCreate?: TemplateCreateOrConnectWithoutUserInput | TemplateCreateOrConnectWithoutUserInput[]
     createMany?: TemplateCreateManyUserInputEnvelope
     connect?: TemplateWhereUniqueInput | TemplateWhereUniqueInput[]
+  }
+
+  export type SavedTemplateUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SavedTemplateCreateWithoutUserInput, SavedTemplateUncheckedCreateWithoutUserInput> | SavedTemplateCreateWithoutUserInput[] | SavedTemplateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutUserInput | SavedTemplateCreateOrConnectWithoutUserInput[]
+    createMany?: SavedTemplateCreateManyUserInputEnvelope
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7679,6 +8993,20 @@ export namespace Prisma {
     deleteMany?: TemplateScalarWhereInput | TemplateScalarWhereInput[]
   }
 
+  export type SavedTemplateUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SavedTemplateCreateWithoutUserInput, SavedTemplateUncheckedCreateWithoutUserInput> | SavedTemplateCreateWithoutUserInput[] | SavedTemplateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutUserInput | SavedTemplateCreateOrConnectWithoutUserInput[]
+    upsert?: SavedTemplateUpsertWithWhereUniqueWithoutUserInput | SavedTemplateUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SavedTemplateCreateManyUserInputEnvelope
+    set?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    disconnect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    delete?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    update?: SavedTemplateUpdateWithWhereUniqueWithoutUserInput | SavedTemplateUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SavedTemplateUpdateManyWithWhereWithoutUserInput | SavedTemplateUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SavedTemplateScalarWhereInput | SavedTemplateScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -7721,10 +9049,38 @@ export namespace Prisma {
     deleteMany?: TemplateScalarWhereInput | TemplateScalarWhereInput[]
   }
 
+  export type SavedTemplateUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SavedTemplateCreateWithoutUserInput, SavedTemplateUncheckedCreateWithoutUserInput> | SavedTemplateCreateWithoutUserInput[] | SavedTemplateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutUserInput | SavedTemplateCreateOrConnectWithoutUserInput[]
+    upsert?: SavedTemplateUpsertWithWhereUniqueWithoutUserInput | SavedTemplateUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SavedTemplateCreateManyUserInputEnvelope
+    set?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    disconnect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    delete?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    update?: SavedTemplateUpdateWithWhereUniqueWithoutUserInput | SavedTemplateUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SavedTemplateUpdateManyWithWhereWithoutUserInput | SavedTemplateUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SavedTemplateScalarWhereInput | SavedTemplateScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type SavedTemplateCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<SavedTemplateCreateWithoutTemplateInput, SavedTemplateUncheckedCreateWithoutTemplateInput> | SavedTemplateCreateWithoutTemplateInput[] | SavedTemplateUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutTemplateInput | SavedTemplateCreateOrConnectWithoutTemplateInput[]
+    createMany?: SavedTemplateCreateManyTemplateInputEnvelope
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+  }
+
+  export type SavedTemplateUncheckedCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<SavedTemplateCreateWithoutTemplateInput, SavedTemplateUncheckedCreateWithoutTemplateInput> | SavedTemplateCreateWithoutTemplateInput[] | SavedTemplateUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutTemplateInput | SavedTemplateCreateOrConnectWithoutTemplateInput[]
+    createMany?: SavedTemplateCreateManyTemplateInputEnvelope
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -7757,6 +9113,62 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type SavedTemplateUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<SavedTemplateCreateWithoutTemplateInput, SavedTemplateUncheckedCreateWithoutTemplateInput> | SavedTemplateCreateWithoutTemplateInput[] | SavedTemplateUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutTemplateInput | SavedTemplateCreateOrConnectWithoutTemplateInput[]
+    upsert?: SavedTemplateUpsertWithWhereUniqueWithoutTemplateInput | SavedTemplateUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: SavedTemplateCreateManyTemplateInputEnvelope
+    set?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    disconnect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    delete?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    update?: SavedTemplateUpdateWithWhereUniqueWithoutTemplateInput | SavedTemplateUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: SavedTemplateUpdateManyWithWhereWithoutTemplateInput | SavedTemplateUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: SavedTemplateScalarWhereInput | SavedTemplateScalarWhereInput[]
+  }
+
+  export type SavedTemplateUncheckedUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<SavedTemplateCreateWithoutTemplateInput, SavedTemplateUncheckedCreateWithoutTemplateInput> | SavedTemplateCreateWithoutTemplateInput[] | SavedTemplateUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: SavedTemplateCreateOrConnectWithoutTemplateInput | SavedTemplateCreateOrConnectWithoutTemplateInput[]
+    upsert?: SavedTemplateUpsertWithWhereUniqueWithoutTemplateInput | SavedTemplateUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: SavedTemplateCreateManyTemplateInputEnvelope
+    set?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    disconnect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    delete?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    connect?: SavedTemplateWhereUniqueInput | SavedTemplateWhereUniqueInput[]
+    update?: SavedTemplateUpdateWithWhereUniqueWithoutTemplateInput | SavedTemplateUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: SavedTemplateUpdateManyWithWhereWithoutTemplateInput | SavedTemplateUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: SavedTemplateScalarWhereInput | SavedTemplateScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSavedTemplatesInput = {
+    create?: XOR<UserCreateWithoutSavedTemplatesInput, UserUncheckedCreateWithoutSavedTemplatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSavedTemplatesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TemplateCreateNestedOneWithoutSavedByInput = {
+    create?: XOR<TemplateCreateWithoutSavedByInput, TemplateUncheckedCreateWithoutSavedByInput>
+    connectOrCreate?: TemplateCreateOrConnectWithoutSavedByInput
+    connect?: TemplateWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSavedTemplatesNestedInput = {
+    create?: XOR<UserCreateWithoutSavedTemplatesInput, UserUncheckedCreateWithoutSavedTemplatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSavedTemplatesInput
+    upsert?: UserUpsertWithoutSavedTemplatesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSavedTemplatesInput, UserUpdateWithoutSavedTemplatesInput>, UserUncheckedUpdateWithoutSavedTemplatesInput>
+  }
+
+  export type TemplateUpdateOneRequiredWithoutSavedByNestedInput = {
+    create?: XOR<TemplateCreateWithoutSavedByInput, TemplateUncheckedCreateWithoutSavedByInput>
+    connectOrCreate?: TemplateCreateOrConnectWithoutSavedByInput
+    upsert?: TemplateUpsertWithoutSavedByInput
+    connect?: TemplateWhereUniqueInput
+    update?: XOR<XOR<TemplateUpdateToOneWithWhereWithoutSavedByInput, TemplateUpdateWithoutSavedByInput>, TemplateUncheckedUpdateWithoutSavedByInput>
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -8120,6 +9532,7 @@ export namespace Prisma {
     category: $Enums.Category
     createdAt?: Date | string
     view?: number
+    savedBy?: SavedTemplateCreateNestedManyWithoutTemplateInput
   }
 
   export type TemplateUncheckedCreateWithoutUserInput = {
@@ -8132,6 +9545,7 @@ export namespace Prisma {
     category: $Enums.Category
     createdAt?: Date | string
     view?: number
+    savedBy?: SavedTemplateUncheckedCreateNestedManyWithoutTemplateInput
   }
 
   export type TemplateCreateOrConnectWithoutUserInput = {
@@ -8141,6 +9555,26 @@ export namespace Prisma {
 
   export type TemplateCreateManyUserInputEnvelope = {
     data: TemplateCreateManyUserInput | TemplateCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SavedTemplateCreateWithoutUserInput = {
+    createdAt?: Date | string
+    template: TemplateCreateNestedOneWithoutSavedByInput
+  }
+
+  export type SavedTemplateUncheckedCreateWithoutUserInput = {
+    templateId: number
+    createdAt?: Date | string
+  }
+
+  export type SavedTemplateCreateOrConnectWithoutUserInput = {
+    where: SavedTemplateWhereUniqueInput
+    create: XOR<SavedTemplateCreateWithoutUserInput, SavedTemplateUncheckedCreateWithoutUserInput>
+  }
+
+  export type SavedTemplateCreateManyUserInputEnvelope = {
+    data: SavedTemplateCreateManyUserInput | SavedTemplateCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -8236,6 +9670,31 @@ export namespace Prisma {
     view?: IntFilter<"Template"> | number
   }
 
+  export type SavedTemplateUpsertWithWhereUniqueWithoutUserInput = {
+    where: SavedTemplateWhereUniqueInput
+    update: XOR<SavedTemplateUpdateWithoutUserInput, SavedTemplateUncheckedUpdateWithoutUserInput>
+    create: XOR<SavedTemplateCreateWithoutUserInput, SavedTemplateUncheckedCreateWithoutUserInput>
+  }
+
+  export type SavedTemplateUpdateWithWhereUniqueWithoutUserInput = {
+    where: SavedTemplateWhereUniqueInput
+    data: XOR<SavedTemplateUpdateWithoutUserInput, SavedTemplateUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SavedTemplateUpdateManyWithWhereWithoutUserInput = {
+    where: SavedTemplateScalarWhereInput
+    data: XOR<SavedTemplateUpdateManyMutationInput, SavedTemplateUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SavedTemplateScalarWhereInput = {
+    AND?: SavedTemplateScalarWhereInput | SavedTemplateScalarWhereInput[]
+    OR?: SavedTemplateScalarWhereInput[]
+    NOT?: SavedTemplateScalarWhereInput | SavedTemplateScalarWhereInput[]
+    userId?: StringFilter<"SavedTemplate"> | string
+    templateId?: IntFilter<"SavedTemplate"> | number
+    createdAt?: DateTimeFilter<"SavedTemplate"> | Date | string
+  }
+
   export type UserCreateWithoutPostsInput = {
     id?: string
     name?: string | null
@@ -8246,6 +9705,7 @@ export namespace Prisma {
     role?: $Enums.Role
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -8258,11 +9718,32 @@ export namespace Prisma {
     role?: $Enums.Role
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+  }
+
+  export type SavedTemplateCreateWithoutTemplateInput = {
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutSavedTemplatesInput
+  }
+
+  export type SavedTemplateUncheckedCreateWithoutTemplateInput = {
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type SavedTemplateCreateOrConnectWithoutTemplateInput = {
+    where: SavedTemplateWhereUniqueInput
+    create: XOR<SavedTemplateCreateWithoutTemplateInput, SavedTemplateUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type SavedTemplateCreateManyTemplateInputEnvelope = {
+    data: SavedTemplateCreateManyTemplateInput | SavedTemplateCreateManyTemplateInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutPostsInput = {
@@ -8286,6 +9767,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -8298,6 +9780,157 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type SavedTemplateUpsertWithWhereUniqueWithoutTemplateInput = {
+    where: SavedTemplateWhereUniqueInput
+    update: XOR<SavedTemplateUpdateWithoutTemplateInput, SavedTemplateUncheckedUpdateWithoutTemplateInput>
+    create: XOR<SavedTemplateCreateWithoutTemplateInput, SavedTemplateUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type SavedTemplateUpdateWithWhereUniqueWithoutTemplateInput = {
+    where: SavedTemplateWhereUniqueInput
+    data: XOR<SavedTemplateUpdateWithoutTemplateInput, SavedTemplateUncheckedUpdateWithoutTemplateInput>
+  }
+
+  export type SavedTemplateUpdateManyWithWhereWithoutTemplateInput = {
+    where: SavedTemplateScalarWhereInput
+    data: XOR<SavedTemplateUpdateManyMutationInput, SavedTemplateUncheckedUpdateManyWithoutTemplateInput>
+  }
+
+  export type UserCreateWithoutSavedTemplatesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    nickname?: string | null
+    role?: $Enums.Role
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    posts?: TemplateCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSavedTemplatesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    nickname?: string | null
+    role?: $Enums.Role
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    posts?: TemplateUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSavedTemplatesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSavedTemplatesInput, UserUncheckedCreateWithoutSavedTemplatesInput>
+  }
+
+  export type TemplateCreateWithoutSavedByInput = {
+    html: string
+    css: string
+    tailwind: boolean
+    status?: $Enums.Status
+    previewUrl?: string | null
+    category: $Enums.Category
+    createdAt?: Date | string
+    view?: number
+    user: UserCreateNestedOneWithoutPostsInput
+  }
+
+  export type TemplateUncheckedCreateWithoutSavedByInput = {
+    id?: number
+    html: string
+    css: string
+    tailwind: boolean
+    status?: $Enums.Status
+    previewUrl?: string | null
+    category: $Enums.Category
+    userId: string
+    createdAt?: Date | string
+    view?: number
+  }
+
+  export type TemplateCreateOrConnectWithoutSavedByInput = {
+    where: TemplateWhereUniqueInput
+    create: XOR<TemplateCreateWithoutSavedByInput, TemplateUncheckedCreateWithoutSavedByInput>
+  }
+
+  export type UserUpsertWithoutSavedTemplatesInput = {
+    update: XOR<UserUpdateWithoutSavedTemplatesInput, UserUncheckedUpdateWithoutSavedTemplatesInput>
+    create: XOR<UserCreateWithoutSavedTemplatesInput, UserUncheckedCreateWithoutSavedTemplatesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSavedTemplatesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSavedTemplatesInput, UserUncheckedUpdateWithoutSavedTemplatesInput>
+  }
+
+  export type UserUpdateWithoutSavedTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    posts?: TemplateUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSavedTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    posts?: TemplateUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TemplateUpsertWithoutSavedByInput = {
+    update: XOR<TemplateUpdateWithoutSavedByInput, TemplateUncheckedUpdateWithoutSavedByInput>
+    create: XOR<TemplateCreateWithoutSavedByInput, TemplateUncheckedCreateWithoutSavedByInput>
+    where?: TemplateWhereInput
+  }
+
+  export type TemplateUpdateToOneWithWhereWithoutSavedByInput = {
+    where?: TemplateWhereInput
+    data: XOR<TemplateUpdateWithoutSavedByInput, TemplateUncheckedUpdateWithoutSavedByInput>
+  }
+
+  export type TemplateUpdateWithoutSavedByInput = {
+    html?: StringFieldUpdateOperationsInput | string
+    css?: StringFieldUpdateOperationsInput | string
+    tailwind?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    previewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+  }
+
+  export type TemplateUncheckedUpdateWithoutSavedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    html?: StringFieldUpdateOperationsInput | string
+    css?: StringFieldUpdateOperationsInput | string
+    tailwind?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    previewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    view?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -8310,6 +9943,7 @@ export namespace Prisma {
     role?: $Enums.Role
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: TemplateCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -8322,6 +9956,7 @@ export namespace Prisma {
     role?: $Enums.Role
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: TemplateUncheckedCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -8350,6 +9985,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: TemplateUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -8362,6 +9998,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: TemplateUncheckedUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -8374,6 +10011,7 @@ export namespace Prisma {
     role?: $Enums.Role
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: TemplateCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -8386,6 +10024,7 @@ export namespace Prisma {
     role?: $Enums.Role
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: TemplateUncheckedCreateNestedManyWithoutUserInput
+    savedTemplates?: SavedTemplateUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -8414,6 +10053,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: TemplateUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -8426,6 +10066,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: TemplateUncheckedUpdateManyWithoutUserNestedInput
+    savedTemplates?: SavedTemplateUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -8458,6 +10099,11 @@ export namespace Prisma {
     category: $Enums.Category
     createdAt?: Date | string
     view?: number
+  }
+
+  export type SavedTemplateCreateManyUserInput = {
+    templateId: number
+    createdAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -8529,6 +10175,7 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     view?: IntFieldUpdateOperationsInput | number
+    savedBy?: SavedTemplateUpdateManyWithoutTemplateNestedInput
   }
 
   export type TemplateUncheckedUpdateWithoutUserInput = {
@@ -8541,6 +10188,7 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     view?: IntFieldUpdateOperationsInput | number
+    savedBy?: SavedTemplateUncheckedUpdateManyWithoutTemplateNestedInput
   }
 
   export type TemplateUncheckedUpdateManyWithoutUserInput = {
@@ -8553,6 +10201,41 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     view?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SavedTemplateUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    template?: TemplateUpdateOneRequiredWithoutSavedByNestedInput
+  }
+
+  export type SavedTemplateUncheckedUpdateWithoutUserInput = {
+    templateId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedTemplateUncheckedUpdateManyWithoutUserInput = {
+    templateId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedTemplateCreateManyTemplateInput = {
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type SavedTemplateUpdateWithoutTemplateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSavedTemplatesNestedInput
+  }
+
+  export type SavedTemplateUncheckedUpdateWithoutTemplateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedTemplateUncheckedUpdateManyWithoutTemplateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

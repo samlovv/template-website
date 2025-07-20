@@ -15,16 +15,17 @@ datasource db {
 }
 
 model User {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?    @unique
-  emailVerified DateTime?
-  image         String?
-  nickname      String?    @unique
-  role          Role       @default(USER)
-  accounts      Account[]
-  sessions      Session[]
-  posts         Template[]
+  id             String          @id @default(cuid())
+  name           String?
+  email          String?         @unique
+  emailVerified  DateTime?
+  image          String?
+  nickname       String?         @unique
+  role           Role            @default(USER)
+  accounts       Account[]
+  sessions       Session[]
+  posts          Template[]
+  savedTemplates SavedTemplate[]
 }
 
 enum Role {
@@ -33,17 +34,29 @@ enum Role {
 }
 
 model Template {
-  id         Int      @id @default(autoincrement())
-  html       String   @db.Text
-  css        String   @db.Text
+  id         Int             @id @default(autoincrement())
+  html       String          @db.Text
+  css        String          @db.Text
   tailwind   Boolean
-  status     Status   @default(unVerified)
+  status     Status          @default(unVerified)
   previewUrl String?
   category   Category
   userId     String
-  user       User     @relation(fields: [userId], references: [id])
+  user       User            @relation(fields: [userId], references: [id])
+  createdAt  DateTime        @default(now())
+  view       Int             @default(0)
+  savedBy    SavedTemplate[]
+}
+
+model SavedTemplate {
+  userId     String
+  templateId Int
   createdAt  DateTime @default(now())
-  view       Int      @default(0)
+
+  user     User     @relation(fields: [userId], references: [id])
+  template Template @relation(fields: [templateId], references: [id])
+
+  @@id([userId, templateId]) // 👈 делает связь уникальной (1 пользователь — 1 раз может сохранить)
 }
 
 model Account {

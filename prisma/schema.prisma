@@ -25,6 +25,7 @@ model User{
   accounts      Account[]
   sessions      Session[]
   posts         Template[]
+  savedTemplates SavedTemplate[]
 }
 
 enum Role {
@@ -45,6 +46,18 @@ model Template{
   user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   view Int @default(0)
+  savedBy     SavedTemplate[]
+}
+
+model SavedTemplate {
+  userId     String
+  templateId Int
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id])
+  template   Template @relation(fields: [templateId], references: [id])
+
+  @@id([userId, templateId]) // 👈 делает связь уникальной (1 пользователь — 1 раз может сохранить)
 }
 
 

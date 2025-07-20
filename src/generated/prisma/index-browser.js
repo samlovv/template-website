@@ -143,6 +143,12 @@ exports.Prisma.TemplateScalarFieldEnum = {
   view: 'view'
 };
 
+exports.Prisma.SavedTemplateScalarFieldEnum = {
+  userId: 'userId',
+  templateId: 'templateId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -193,6 +199,10 @@ exports.Prisma.TemplateOrderByRelevanceFieldEnum = {
   html: 'html',
   css: 'css',
   previewUrl: 'previewUrl',
+  userId: 'userId'
+};
+
+exports.Prisma.SavedTemplateOrderByRelevanceFieldEnum = {
   userId: 'userId'
 };
 
@@ -255,6 +265,7 @@ exports.Category = exports.$Enums.Category = {
 exports.Prisma.ModelName = {
   User: 'User',
   Template: 'Template',
+  SavedTemplate: 'SavedTemplate',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken'

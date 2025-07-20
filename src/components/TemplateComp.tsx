@@ -70,17 +70,23 @@ const TemplateComp = () => {
     }
   }, [categoryParam]);
 
+  const save = async (id: string) => {
+    
+      const res = await axios.post(`/api/templates/save/${id}`);
+      const data = await res.data;
+      console.log(data);
+  }
 
 
   const filteredTemplates = templates.filter((template) => {
-  const categoryMatch = selectedCategory === "All" || template.category === selectedCategory;
-  const techMatch =
-    filter === "all" ||
-    (filter === "tailwind" && template.tailwind) ||
-    (filter === "css" && !template.tailwind);
+    const categoryMatch = selectedCategory === "All" || template.category === selectedCategory;
+    const techMatch =
+      filter === "all" ||
+      (filter === "tailwind" && template.tailwind) ||
+      (filter === "css" && !template.tailwind);
 
-  return categoryMatch && techMatch;
-});
+    return categoryMatch && techMatch;
+  });
 
   useGSAP(() => {
     const cards = cardRefs.current.filter((el): el is HTMLDivElement => el !== null);
@@ -160,7 +166,7 @@ const TemplateComp = () => {
                           {hoveredId === t.id? (<button className='flex bg-[#191919] w-36 gap-3 rounded-xl absolute right-4 bottom-4 cursor-pointer hover:bg-[#262626] p-3'><CodeXml/> Get Code </button>): null}
                           
                 </Link>
-                <div className='absolute flex justify-between w-full px-2 bottom-[-34px] float-right mt-3 font-sans text-lg'><span className='text-[16px]'>{t.user.nickname}</span><span className='text-[16px] flex gap-1 text-[#b4b4b4]'><Eye/>{t.view}</span><span className='text-[#b4b4b4] text-[16px]'>{t.category}</span></div>
+                <div className='absolute flex justify-between w-full px-2 bottom-[-40px] float-right font-sans items-center text-lg'><span className='text-[16px]'>{t.user.nickname}</span><span className='text-[16px] flex gap-1 text-[#b4b4b4]'><Eye/>{t.view}</span><span className='text-[#b4b4b4] text-[16px]'>{t.category}</span> <button className='transition-all cursor-pointer rounded-md p-2 px-4 hover:bg-white/20' onClick={()=>save(t.id)}>Save</button></div>
               </div>))}
             </div>
           </div>
