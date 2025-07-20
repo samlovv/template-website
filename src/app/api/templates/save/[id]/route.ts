@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 
-type Params = Promise<{ id: string }>;
+type Params = Promise<{ id: number }>;
 
 export async function POST(req: NextRequest, { params }: { params: Params }) {
   const session = await getServerSession(authOptions);
