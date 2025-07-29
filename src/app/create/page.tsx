@@ -13,6 +13,7 @@ import tailwindicon from "@/assets/icons/tailwind-css-svgrepo-com.svg"
 import Image from 'next/image';
 import {LayoutGrid} from 'lucide-react'
 import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 
 const DEFAULT_HTML = `<div class="text-3xl font-bold text-blue-500">
   Hello World!
@@ -130,6 +131,11 @@ export default function Home() {
     const data = await res.json();
     
     console.log(data);
+    if (data) {
+      toast.success('Template created successfully!', { position: 'bottom-left' });
+    } else {
+      toast.error('An error occurred while creating the template.', { position: 'bottom-left' });
+    }
     router.push('/profile')
   };
 
@@ -195,6 +201,7 @@ export default function Home() {
             >
             🚀 Submit for review
           </button>
+          <Toaster />
           </div>
            
         </div>

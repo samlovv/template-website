@@ -15,6 +15,7 @@ import gsap from 'gsap'
 import { TextPlugin } from "gsap/TextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react'
+import toast, { Toaster } from 'react-hot-toast';
 
 gsap.registerPlugin(useGSAP, TextPlugin, ScrollTrigger);
 
@@ -78,6 +79,15 @@ const TemplateComp = () => {
       const res = await axios.post(`/api/templates/save/${id}`);
       const data = await res.data;
       console.log(data);
+      if (data.message === 'Saved') {
+        toast.success('Template saved successfully!' , {position: 'bottom-left'});
+      } else if (data.message === 'Already saved') {
+        toast.error('You have already saved this template.', {position: 'bottom-left'});
+      } else {
+        toast.error('An error occurred while saving the template.' , {position: 'bottom-left'});
+      }
+
+      
   }
 
 
@@ -108,10 +118,14 @@ const TemplateComp = () => {
   }, [templates, filter, selectedCategory]);
 
 
+ 
+
+
 
 
   return (
     <div className='pt-10'>
+      <Toaster />
       <div className='flex md:flex-row flex-col'>
         <div className='md:w-1/4 '>
           <CategorySelector selected={selectedCategory} setSelected = {setSelectedCategory}/>

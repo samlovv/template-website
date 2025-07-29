@@ -281,11 +281,12 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:Samandar_2005b@localhost:3306/next_course"
+        "value": null
       }
     }
   },
