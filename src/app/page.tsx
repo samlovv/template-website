@@ -8,6 +8,10 @@ import LastTwo from '@/components/LastTwo';
 const Home = async() => {
   
   const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/templates/last`)
+  if (!data.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  const templates = await data.json();
   
   
           
@@ -15,7 +19,7 @@ const Home = async() => {
     <div className='w-full '>
       <Header/>
       <div>
-        <LastTwo data={data}/>
+        <LastTwo data={templates}/>
       </div>
       
       
