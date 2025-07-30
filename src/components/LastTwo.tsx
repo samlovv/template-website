@@ -28,7 +28,7 @@ type User = {
 
 
 
-const LastTwo = () => {
+const LastTwo = ({data} : {data: any}) => {
 
   
 
@@ -38,15 +38,16 @@ const LastTwo = () => {
     const textR = useRef(null)
 
      useEffect(()=>{
-        const getTemplate = async()=>{
+        /* const getTemplate = async()=>{
           const res = await fetch('/api/templates/last')
           const templates = await res.json()
           
           
           setTemplates(templates)
         }
-        getTemplate()
-      },[])
+        getTemplate() */
+        setTemplates(data)
+      },[data])
       
  
       useGSAP(()=>{
