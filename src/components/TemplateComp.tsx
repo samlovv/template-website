@@ -74,8 +74,8 @@ const TemplateComp = ({data} : {data: any}) => {
       console.log(data);
       if (data.message === 'Saved') {
         toast.success('Template saved successfully!' , {position: 'bottom-left'});
-      } else if (data.message === 'Already saved') {
-        toast.error('You have already saved this template.', {position: 'bottom-left'});
+      } else if (data.message === 'Deleted') {
+        toast.success('Template deleted from favorites. ', {position: 'bottom-left'});
       } else {
         toast.error('An error occurred while saving the template.' , {position: 'bottom-left'});
       }

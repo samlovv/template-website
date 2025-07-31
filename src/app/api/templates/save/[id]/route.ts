@@ -27,7 +27,15 @@ export async function POST(req: NextRequest, { params }: { params: Params }) {
     });
 
     if (existing) {
-      return NextResponse.json({ message: 'Already saved' });
+      await prisma.savedTemplate.delete({
+        where: {
+          userId_templateId: {
+            userId,
+            templateId,
+          },
+        },
+      });
+      return NextResponse.json({ message: 'Deleted' });
     }
 
     await prisma.savedTemplate.create({

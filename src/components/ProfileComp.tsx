@@ -97,7 +97,7 @@ export default function ProfilePage() {
                   "px-4 sm:px-8 py-2 text-lg cursor-pointer font-sans",
                   activeTab === tab
                     ? "bg-white/15 rounded-md border-white text-white"
-                    : "text-gray-500 hover:text-white"
+                    : "text-gray-500 hover:text-white hover:bg-white/7 rounded-md transition-colors"
                 )}
               >
                 {tab}
