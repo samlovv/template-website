@@ -7,11 +7,17 @@ export const metadata = {
   description: 'Explore a collection of modern website templates. Browse, preview, and get inspired by community-generated designs.',
 }
 
-const Templates = () => {
+ const  Templates =async () => {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/templates/verified`)
+  if (!data.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  const templates = await data.json();
+  
   return (
     <div className='my-20 px-6 md:px-12'>
       <Suspense fallback={<div>Loading Templates...</div>}>
-        <TemplateComp />
+        <TemplateComp data={templates}/>
       </Suspense>
     </div>
   )

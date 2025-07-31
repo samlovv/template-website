@@ -40,7 +40,7 @@ type User = {
 }
 
 
-const TemplateComp = () => {
+const TemplateComp = ({data} : {data: any}) => {
 
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [templates, setTemplates] = useState<Template[]>([])
@@ -51,17 +51,10 @@ const TemplateComp = () => {
    
 
   useEffect(()=>{
-    show()
-    const getTemplate = async()=>{
-      const res = await fetch('/api/templates/verified')
-      const templates = await res.json()
-      
-      console.log(templates)
-      setTemplates(templates)
-      hide()
+    if(data) {
+      setTemplates(data); 
     }
-    getTemplate()
-  },[])
+  },[data])
 
   
   const searchParams = useSearchParams();
