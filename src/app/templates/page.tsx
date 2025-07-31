@@ -7,20 +7,29 @@ export const metadata = {
   description: 'Explore a collection of modern website templates. Browse, preview, and get inspired by community-generated designs.',
 }
 
- const  Templates =async () => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/templates/verified`)
-  if (!data.ok) {
-    throw new Error('Failed to fetch data');
+ const Templates = async () => {
+  let templates = [];
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/templates/verified`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) throw new Error('API error');
+
+    templates = await res.json();
+  } catch (e) {
+    console.error('Ошибка при загрузке шаблонов:', e);
+    // Можешь здесь вернуть пустой массив или другой fallback
   }
-  const templates = await data.json();
-  
+
   return (
     <div className='my-20 px-6 md:px-12'>
       <Suspense fallback={<div>Loading Templates...</div>}>
-        <TemplateComp data={templates}/>
+        <TemplateComp data={templates} />
       </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default Templates
+export default Templates;
