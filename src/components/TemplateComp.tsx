@@ -69,9 +69,10 @@ const TemplateComp = ({data} : {data: any}) => {
 
   const save = async (id: string) => {
     
+      show();
       const res = await axios.post(`/api/templates/save/${id}`);
       const data = await res.data;
-      console.log(data);
+      hide();
       if (data.message === 'Saved') {
         toast.success('Template saved successfully!' , {position: 'bottom-left'});
       } else if (data.message === 'Deleted') {
