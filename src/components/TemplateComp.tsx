@@ -119,7 +119,15 @@ const TemplateComp = ({data} : {data: any}) => {
 
   return (
     <div className='pt-10'>
-      <Toaster />
+      <Toaster toastOptions={{
+      className: '',
+      style: {
+        border: '1px solid #505050',
+        padding: '20px',
+        color: '#fff',
+        backgroundColor: '#101010',
+        fontSize: '16px',
+      },}}/>
       <div className='flex md:flex-row flex-col'>
         <div className='md:w-1/4 '>
           <CategorySelector selected={selectedCategory} setSelected = {setSelectedCategory}/>

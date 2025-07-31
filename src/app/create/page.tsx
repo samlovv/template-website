@@ -201,7 +201,15 @@ export default function Home() {
             >
             🚀 Submit for review
           </button>
-          <Toaster />
+          <Toaster toastOptions={{
+                className: '',
+                style: {
+                  border: '1px solid #505050',
+                  padding: '20px',
+                  color: '#fff',
+                  backgroundColor: '#101010',
+                  fontSize: '16px',
+                },}}/>
           </div>
            
         </div>
