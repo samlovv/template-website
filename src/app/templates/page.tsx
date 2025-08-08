@@ -8,20 +8,15 @@ export const metadata = {
 }
 
  const Templates = async () => {
-  let templates = [];
 
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/templates/verified`, {
-      cache: 'no-store',
-    });
-
-    if (!res.ok) throw new Error('API error');
-
-    templates = await res.json();
-  } catch (e) {
-    console.error('Ошибка при загрузке шаблонов:', e);
-    // Можешь здесь вернуть пустой массив или другой fallback
-  }
+ 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/templates/verified`)
+    if (!res.ok) {
+      throw new Error('API error')
+    };
+    const templates = await res.json();
+  
+    
 
   return (
     <div className='my-20 px-6 md:px-12'>

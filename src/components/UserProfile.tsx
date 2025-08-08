@@ -11,9 +11,7 @@ import { CodeXml } from 'lucide-react'
 import { useLoading } from './loading-context'
 
 
-type Props ={
-    username: string;
-}
+
 type Template = {
     id: number;
     category: string;
@@ -27,7 +25,7 @@ type User ={
 }
 
 
-const UserProfile = ({username}: Props) => {
+const UserProfile = ({userData}: {userData :any}) => {
 
     const tabs = ["Posts"];
     const [activeTab, setActiveTab] = useState("Posts");
@@ -38,15 +36,13 @@ const UserProfile = ({username}: Props) => {
     
     useEffect(()=>{
         show();
-        async function fetchUser(){
-            const res = await fetch(`/api/users/username?username=${username}`);
-            const data = await res.json();
-            setUser(data)
-            setTemplates(data.posts)
-        }
-        fetchUser();
+            
+            setUser(userData)
+            setTemplates(userData.posts)
+        
+        
         hide();
-    }, [])
+    }, [userData])
   return (
     <div className="min-h-screen w-full lg:w-4/6 text-white flex flex-col">
       {/* Main Content */}

@@ -19,14 +19,20 @@ export async function generateMetadata({ params }: { params: Params }) {
 const UserPage = async({ params }: { params: Params }) => {
     const { username } = await params
 
-    
+  // Fetch user by username
+  const user = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/username?username=${username}`)
+  if (!user.ok) {
+    notFound()
+  }
+  const userData = await user.json()
+
     
   return (
     <div className='mt-20 flex'>
         <div className='w-1/4 hidden lg:flex'>
             <ProfileCategorySelector/>
         </div>
-        <UserProfile username={username} />
+        <UserProfile userData={userData} />
     </div>
   )
 }
