@@ -15,7 +15,7 @@ gsap.registerPlugin(useGSAP, TextPlugin, ScrollTrigger);
 
 
 
-const Header = () => {
+const Header = ({data} : {data: any}) => {
 
   const [usercount, setUserCount] = useState(0)
   const [tempcount, setTempCount] = useState(0)
@@ -28,15 +28,11 @@ const Header = () => {
   
 
   useEffect(()=>{
-    const getNumberOfTemplates = async()=>{
-      const res = await fetch('/api/templates/count')
-      const templates = await res.json()
-      setTempCount(templates.templates)
-      setUserCount(templates.users)
+    
+      setTempCount(data.templates)
+      setUserCount(data.users)
 
-    }
-    getNumberOfTemplates()
-  },[])
+  },[data])
 
   useGSAP(()=>{
     gsap.from(textRef.current, {
