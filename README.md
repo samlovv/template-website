@@ -35,6 +35,9 @@ View full code, author, and template type
 Shows user avatar, nickname, and their published templates  
 ![profile-page](./docs/screens/profile.png)
 
+### ❤️ Favorite Templates Page
+Shows all templates saved by user
+![saved-templates](./docs/screens/saved-template-page.png)
 ---
 
 ## 🧪 Tech Stack
