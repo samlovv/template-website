@@ -1,94 +1,47 @@
+// ...existing code...
 'use client'
-/* import React, { useEffect, useState } from 'react'
-import CodeMirror from '@uiw/react-codemirror'
-import { html } from '@codemirror/lang-html'
-import { css } from '@codemirror/lang-css'
-
-type Props = {
-  value: string
-  onChange: (val: string) => void
-  lang: 'html' | 'css'
-}
-
-export default function TemplateEdit({ value, onChange, lang }: Props) {
-  return (
-    <CodeMirror
-      value={value}
-      height="200px"
-      extensions={[lang === 'html' ? html() : css()]}
-      onChange={(val) => onChange(val)}
-    />
-  )
-}
- */
-
 import { useState, useEffect } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
-import { useLoading } from './loading-context';
-import axios from 'axios';
 import Image from 'next/image';
 import { dracula } from '@uiw/codemirror-theme-dracula';
 import Htmlicon from "@/assets/icons/html-5-svgrepo-com.svg"
 import Cssicon from "@/assets/icons/css3-svgrepo-com.svg"
 import tailwindicon from "@/assets/icons/tailwind-css-svgrepo-com.svg"
 import Link from 'next/link';
-import {LayoutGrid} from 'lucide-react'
 
-const DEFAULT_HTML = `<div class="text-3xl font-bold text-blue-500">
-  Hello World!
-</div>`;
-const DEFAULT_CSS = `body { padding: 20px; font-family: sans-serif; }`;
+type UserType = {
+  nickname: string | null;
+  image?: string | null;
+};
 
-export default function TemplateEdit({ id }: { id: string }) {
+type TemplateData = {
+  id: number;
+  html: string | null;
+  css: string | null;
+  tailwind: boolean;
+  category: string | null;
+  user: UserType | null;
+  previewUrl?: string | null;
+  createdAt?: Date | string;
+};
+
+export default function TemplateEdit({ id, initialData }: { id: string; initialData: TemplateData }) {
   const [activeTab, setActiveTab] = useState<'html' | 'css'>('html');
-  const [htmlCode, setHtmlCode] = useState('');
-  const [cssCode, setCssCode] = useState('');
-  const [useTailwind, setUseTailwind] = useState(true);
-  const [category, setCategory] = useState('');
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true); // 🆕
-
-  const { show, hide } = useLoading();
-
-
-  type User = {
-    nickname: any;
-    image: string;
-  };
+  const [htmlCode, setHtmlCode] = useState(initialData.html ?? '');
+  const [cssCode, setCssCode] = useState(initialData.css ?? '');
+  const [useTailwind, setUseTailwind] = useState<boolean>(!!initialData.tailwind);
+  const [category, setCategory] = useState(initialData.category ?? '');
+  const [user, setUser] = useState<UserType | null>(initialData.user ?? null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    // increment view counter (keeps client-side effect)
     fetch(`/api/templates/verified/views/${id}`, {
       method: 'POST',
-    });
+    }).catch((e) => console.error(e));
   }, [id]);
-
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        show();
-        const res = await fetch(`/api/templates/view?id=${id}`);
-        const data = await res.json();
-        setCssCode(data.css || '');
-        setHtmlCode(data.html || '');
-        setUseTailwind(data.tailwind);
-        setCategory(data.category);
-        setUser(data.user);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false); // 🆕 данные загружены
-        hide();
-      }
-    }
-
-    fetchData();
-  }, [id]);
-
-  
-  
 
   const generateSrcDoc = () => {
     const tailwindCDN = `<script src="https://cdn.tailwindcss.com"></script>`;
@@ -157,9 +110,6 @@ export default function TemplateEdit({ id }: { id: string }) {
     }
   };
 
-
-  
-
   return (
     <div className="min-h-screen flex flex-col gap-6">
       {user && (
@@ -171,7 +121,6 @@ export default function TemplateEdit({ id }: { id: string }) {
       </div>
       )}
       
-      {/* IFRAME — ВЕРХ */}
       <div className="h-[500px] w-full mt-4 px-[30px]">
         {!isLoading ? (
           <iframe
@@ -187,15 +136,12 @@ export default function TemplateEdit({ id }: { id: string }) {
         )}
       </div>
 
-      {/* НИЖНЯЯ ЧАСТЬ: редактор и inputs */}
       <div className="flex flex-col px-[30px] gap-6">
-        {/* Слева — редактор */}
         <div className=" flex flex-col rounded-2xl border-gray-300 bg-[#212121]">
           {useTailwind ? (
             <div className="p-4 text-white flex items-center font-semibold text-lg"><Image src={Htmlicon} alt='htmlicon' height={23} width={23}/>HTML + <Image src={tailwindicon} alt='tailwindicon' height={23} width={23}/>Tailwind</div>
           ) : (
             <>
-              {/* Tabs */}
               <div className="flex pl-10 rounded-2xl items-center p-2 bg-[#212121]">
                 {[{name:'html', icon: <Image src={Htmlicon} alt='' height={23} width={23}/>}, {name:'css', icon: <Image src={Cssicon} height={23} width={23} alt=''/>}].map((tab) => (
                   <button
@@ -218,11 +164,8 @@ export default function TemplateEdit({ id }: { id: string }) {
             {getEditor()}
           </div>
         </div>
-
-
-        
       </div>
     </div>
   );
 }
-
+// ...existing code...
